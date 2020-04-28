@@ -1,0 +1,121 @@
+version: "3"
+
+services:
+  weskool:
+    restart: unless-stopped
+    build:
+      context: ./weskoolmm #Must be directory with Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - 8080:80
+    # links:
+    #   - db
+    depends_on:
+      - db
+      - db1
+      - db2
+      - api
+      - mongo-replicator
+
+  db:
+    image: mongo
+    # environment:
+    #   MONGO_INITDB_ROOT_USERNAME: root
+    #   MONGO_INITDB_ROOT_PASSWORD: password
+    command: --replSet rs0 --port 27017 --bind_ip localhost --dbpath /data/db
+    network_mode: "host"
+    # networks:
+    #   - mongo-cluster
+    # ports:
+    #   - 27017:27017
+    volumes:
+      - ~/projs/DockerWeskool/db/nodes/rdb1:/data/db
+
+  db1:
+    image: mongo
+    command: --replSet rs0 --port 27018 --bind_ip localhost --dbpath /data/db
+    network_mode: "host"
+    # networks:
+    #   - mongo-cluster
+    # ports:
+    #   - 27018:27017
+    volumes:
+      - ~/projs/DockerWeskool/db/nodes/rdb2:/data/db
+    depends_on:
+      - db
+
+  db2:
+    image: mongo
+    command: --replSet rs0 --port 27019 --bind_ip localhost --dbpath /data/db
+    network_mode: "host"
+    # networks:
+    #   - mongo-cluster
+    # ports:
+    #   - 27019:27017
+    volumes:
+      - ~/projs/DockerWeskool/db/nodes/rdb3:/data/db
+    depends_on:
+      - db1
+
+  mongo-replicator:
+    build: ./db/replicator
+    network_mode: "host"
+    # networks:
+    #   - mongo-cluster
+    depends_on:
+      - db
+      - db1
+      - db2
+
+  api:
+    restart: unless-stopped
+    build:
+      context: ./Api
+      dockerfile: Dockerfile
+    network_mode: "host"
+    # ports:
+    #   - 5443:5443
+    # links:
+    #   - db
+    depends_on:
+      - db
+      - db1
+      - db2
+      - mongo-replicator
+
+  uploads:
+    restart: unless-stopped
+    build:
+      context: ./uploads
+      dockerfile: Dockerfile
+    network_mode: "host"
+    volumes:
+      - ~/projs/DockerWeskool/db:/db
+      - ~/projs/DockerWeskool/Api/modules:/modules
+    depends_on:
+      - db
+      - db1
+      - db2
+      - mongo-replicator
+      - weskool
+
+  downloads:
+    restart: unless-stopped
+    build:
+      context: ./downloads
+      dockerfile: Dockerfile
+    network_mode: "host"
+    volumes:
+      - ~/projs/DockerWeskool/db:/db
+      - ~/projs/DockerWeskool/Api/modules:/modules
+    depends_on:
+      - db
+      - db1
+      - db2
+      - mongo-replicator
+      - weskool
+      - uploads
+
+networks:
+  mongo-cluster:
+    driver: bridge

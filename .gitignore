@@ -1,0 +1,29 @@
+Api/node_modules
+Api/keys
+Api/uploads
+db/baks
+db/nodes
+db/uploads
+downloads/node_modules
+uploads/node_modules
+
+weskoolmm/.DS_Store
+weskoolmm/node_modules
+
+# local env files
+weskoolmm/.env.local
+weskoolmm/.env.*.local
+
+# Log files
+weskoolmm/npm-debug.log*
+weskoolmm/yarn-debug.log*
+weskoolmm/yarn-error.log*
+
+# Editor directories and files
+weskoolmm/.idea
+weskoolmm/.vscode
+weskoolmm/*.suo
+weskoolmm/*.ntvs*
+weskoolmm/*.njsproj
+weskoolmm/*.sln
+weskoolmm/*.sw?

@@ -1,0 +1,15 @@
+[submodule "Api"]
+	path = Api
+	url = https://github.com/kimanihuon/weskoolapi.git
+[submodule "weskoolmm"]
+	path = weskoolmm
+	url = https://github.com/kimanihuon/megamind.git
+[submodule "uploads"]
+	path = uploads
+	url = https://github.com/kimanihuon/weskoolapiuploads.git
+[submodule "downloads"]
+	path = downloads
+	url = https://github.com/kimanihuon/weskoolapidownloads.git
+[submodule "db"]
+	path = db
+	url = https://github.com/kimanihuon/weskooldb.git
