@@ -6,6 +6,8 @@ services:
     build:
       context: ./weskoolmm #Must be directory with Dockerfile
       dockerfile: Dockerfile
+    environment: 
+      - JWT
     volumes:
       - /etc/letsencrypt/live/weskool.team/:/etc/nginx/certs/
     ports:
@@ -74,6 +76,8 @@ services:
     build:
       context: ./Api
       dockerfile: Dockerfile
+    environment: 
+      - JWT
     network_mode: "host"
     # ports:
     #   - 5443:5443
@@ -90,6 +94,8 @@ services:
     build:
       context: ./uploads
       dockerfile: Dockerfile
+    environment: 
+      - JWT
     network_mode: "host"
     volumes:
       - ~/projs/DockerWeskool/db:/db
@@ -106,6 +112,8 @@ services:
     build:
       context: ./downloads
       dockerfile: Dockerfile
+    environment: 
+      - JWT
     network_mode: "host"
     volumes:
       - ~/projs/DockerWeskool/db:/db
