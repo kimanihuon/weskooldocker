@@ -97,7 +97,7 @@ services:
     restart: unless-stopped
     build:
       context: ./Api
-      dockerfile: DockerfileUploads
+      dockerfile: Dockerfile
     environment: 
       - JWT
       - CERTKEY
@@ -106,6 +106,8 @@ services:
     volumes:
       - ~/projs/DockerWeskool/db:/db
       - ~/projs/DockerWeskool/Api/modules:/modules
+    command: 
+      ["node", "uploads.js"] 
     depends_on:
       - db
       - db1
@@ -117,7 +119,7 @@ services:
     restart: unless-stopped
     build:
       context: ./Api
-      dockerfile: DockerfileDownloads
+      dockerfile: Dockerfile
     environment: 
       - JWT
       - CERTKEY
@@ -126,6 +128,8 @@ services:
     volumes:
       - ~/projs/DockerWeskool/db:/db
       - ~/projs/DockerWeskool/Api/modules:/modules
+    command: 
+      ["node", "downloads.js"] 
     depends_on:
       - db
       - db1
