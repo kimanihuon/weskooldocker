@@ -6,6 +6,8 @@ services:
     build:
       context: ./weskoolmm #Must be directory with Dockerfile
       dockerfile: Dockerfile
+    volumes:
+      - /etc/letsencrypt/live/weskool.team/:/etc/nginx/certs/
     ports:
       - 8080:80
     # links:
