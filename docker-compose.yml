@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     environment: 
       - JWT
+      - CERTKEY
+      - CERTCHAIN
     volumes:
       - /etc/letsencrypt/live/weskool.team/:/etc/nginx/certs/
     ports:
@@ -78,6 +80,8 @@ services:
       dockerfile: Dockerfile
     environment: 
       - JWT
+      - CERTKEY
+      - CERTCHAIN
     network_mode: "host"
     # ports:
     #   - 5443:5443
@@ -92,10 +96,12 @@ services:
   uploads:
     restart: unless-stopped
     build:
-      context: ./uploads
-      dockerfile: Dockerfile
+      context: ./Api
+      dockerfile: DockerfileUploads
     environment: 
       - JWT
+      - CERTKEY
+      - CERTCHAIN
     network_mode: "host"
     volumes:
       - ~/projs/DockerWeskool/db:/db
@@ -110,10 +116,12 @@ services:
   downloads:
     restart: unless-stopped
     build:
-      context: ./downloads
-      dockerfile: Dockerfile
+      context: ./Api
+      dockerfile: DockerfileDownloads
     environment: 
       - JWT
+      - CERTKEY
+      - CERTCHAIN
     network_mode: "host"
     volumes:
       - ~/projs/DockerWeskool/db:/db
