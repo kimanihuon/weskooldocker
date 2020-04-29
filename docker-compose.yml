@@ -114,8 +114,7 @@ services:
     volumes:
       - /etc/letsencrypt/live/weskool.team:/etc/letsencrypt/live/weskool.team/
       - /etc/letsencrypt/archive/weskool.team:/etc/letsencrypt/archive/weskool.team/
-      - ~/projs/DockerWeskool/db:/db
-      - ~/projs/DockerWeskool/Api/modules:/modules
+      - ~/projs/DockerWeskool/db/uploads:/db/uploads/
     command: ["node", "uploads.js"]
     depends_on:
       - db
