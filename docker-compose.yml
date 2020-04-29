@@ -74,7 +74,6 @@ services:
       - db2
 
   api:
-    restart: unless-stopped
     build:
       context: ./Api
       dockerfile: Dockerfile
@@ -97,7 +96,6 @@ services:
       - mongo-replicator
 
   uploads:
-    restart: unless-stopped
     build:
       context: ./Api
       dockerfile: Dockerfile
@@ -119,7 +117,6 @@ services:
       - weskool
 
   downloads:
-    restart: unless-stopped
     build:
       context: ./Api
       dockerfile: Dockerfile
