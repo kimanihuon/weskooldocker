@@ -6,7 +6,7 @@ services:
     build:
       context: ./weskoolmm #Must be directory with Dockerfile
       dockerfile: Dockerfile
-    environment: 
+    environment:
       - JWT
       - CERTKEY
       - CERTCHAIN
@@ -78,11 +78,12 @@ services:
     build:
       context: ./Api
       dockerfile: Dockerfile
-    environment: 
+    environment:
       - JWT
       - CERTKEY
       - CERTCHAIN
     network_mode: "host"
+    command: ["node", "index.js"]
     # ports:
     #   - 5443:5443
     # links:
@@ -98,7 +99,7 @@ services:
     build:
       context: ./Api
       dockerfile: Dockerfile
-    environment: 
+    environment:
       - JWT
       - CERTKEY
       - CERTCHAIN
@@ -106,8 +107,7 @@ services:
     volumes:
       - ~/projs/DockerWeskool/db:/db
       - ~/projs/DockerWeskool/Api/modules:/modules
-    command: 
-      ["node", "uploads.js"] 
+    command: ["node", "uploads.js"]
     depends_on:
       - db
       - db1
@@ -120,7 +120,7 @@ services:
     build:
       context: ./Api
       dockerfile: Dockerfile
-    environment: 
+    environment:
       - JWT
       - CERTKEY
       - CERTCHAIN
@@ -128,8 +128,7 @@ services:
     volumes:
       - ~/projs/DockerWeskool/db:/db
       - ~/projs/DockerWeskool/Api/modules:/modules
-    command: 
-      ["node", "downloads.js"] 
+    command: ["node", "downloads.js"]
     depends_on:
       - db
       - db1
