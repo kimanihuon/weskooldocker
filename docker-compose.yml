@@ -11,6 +11,8 @@ services:
       - CERTKEY
       - CERTCHAIN
     volumes:
+      volumes:
+      - /etc/letsencrypt/archive/weskool.team:/etc/letsencrypt/archive/weskool.team/
       - /etc/letsencrypt/live/weskool.team/:/etc/nginx/certs/
     ports:
       - 8080:80
@@ -84,7 +86,8 @@ services:
     network_mode: "host"
     command: ["node", "index.js"]
     volumes:
-      - /etc/letsencrypt/live/weskool.team/:/etc/letsencrypt/live/weskool.team/
+      - /etc/letsencrypt/live/weskool.team:/etc/letsencrypt/live/weskool.team/
+      - /etc/letsencrypt/archive/weskool.team:/etc/letsencrypt/archive/weskool.team/
     # ports:
     #   - 5443:5443
     # links:
@@ -105,7 +108,8 @@ services:
       - CERTCHAIN
     network_mode: "host"
     volumes:
-      - /etc/letsencrypt/live/weskool.team/:/etc/letsencrypt/live/weskool.team/
+      - /etc/letsencrypt/live/weskool.team:/etc/letsencrypt/live/weskool.team/
+      - /etc/letsencrypt/archive/weskool.team:/etc/letsencrypt/archive/weskool.team/
       - ~/projs/DockerWeskool/db:/db
       - ~/projs/DockerWeskool/Api/modules:/modules
     command: ["node", "uploads.js"]
@@ -126,7 +130,8 @@ services:
       - CERTCHAIN
     network_mode: "host"
     volumes:
-      - /etc/letsencrypt/live/weskool.team/:/etc/letsencrypt/live/weskool.team/
+      - /etc/letsencrypt/live/weskool.team:/etc/letsencrypt/live/weskool.team/
+      - /etc/letsencrypt/archive/weskool.team:/etc/letsencrypt/archive/weskool.team/
       - ~/projs/DockerWeskool/db:/db
       - ~/projs/DockerWeskool/Api/modules:/modules
     command: ["node", "downloads.js"]
