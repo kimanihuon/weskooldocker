@@ -26,6 +26,7 @@ services:
       - mongo-replicator
 
   db:
+    restart: unless-stopped
     image: mongo
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: root
@@ -40,6 +41,7 @@ services:
       - ~/projs/DockerWeskool/db/nodes/rdb1:/data/db
 
   db1:
+    restart: unless-stopped
     image: mongo
     command: --replSet rs0 --port 27018 --bind_ip localhost --dbpath /data/db
     network_mode: "host"
@@ -53,6 +55,7 @@ services:
       - db
 
   db2:
+    restart: unless-stopped
     image: mongo
     command: --replSet rs0 --port 27019 --bind_ip localhost --dbpath /data/db
     network_mode: "host"
