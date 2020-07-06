@@ -3,12 +3,14 @@
 # chmod +x envs.sh
 # Run with source envs.sh
 
-ENV="Development"
+ENV="production"
+JWT=""
+CERTKEY="/etc/letsencrypt/live/weskool.team/<PRIVATE KEY NAME>"
+CERTCHAIN="/etc/letsencrypt/live/weskool.team/<PUBLIC KEY NAME>"
 user=""
 password=""
 email=""
 project="weskool"
-jwt=""
 sqlurl="mysql://root:${password}@127.0.0.1/${project}"
 
 # Email
@@ -22,6 +24,10 @@ export ENV="${ENV}"
 
 # JWT key
 export JWT="${jwt}"
+
+# Certificates
+export CERTKEY="${CERTKEY}"
+export CERTCHAIN="${CERTCHAIN}"
 
 # Mongo credentials
 export MONGO_INITDB_ROOT_USERNAME="${user}"
@@ -42,6 +48,8 @@ export DATABASE_URL="${sqlurl}"
 echo "Project Name: ${PROJECT_NAME}"
 echo "Mode: ${ENV}"
 echo "Jwt: ${JWT}"
+echo "CERTKEY: ${CERTKEY}"
+echo "CERTCHAIN: ${CERTCHAIN}"
 echo "Mongo User: ${MONGO_INITDB_ROOT_USERNAME}"
 echo "Mongo Pass: ${MONGO_INITDB_ROOT_PASSWORD}"
 echo "Mongo Express User: ${ME_CONFIG_MONGODB_ADMINUSERNAME}"
@@ -51,5 +59,7 @@ echo "SQL url: ${DATABASE_URL}"
 echo "SQL User: ${MYSQL_USER}"
 echo "SQL Database: ${MYSQL_DATABASE}"
 echo "USER Email: ${USER_EMAIL}"
+
+
 
 
