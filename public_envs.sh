@@ -60,6 +60,5 @@ echo "SQL User: ${MYSQL_USER}"
 echo "SQL Database: ${MYSQL_DATABASE}"
 echo "USER Email: ${USER_EMAIL}"
 
-
-
-
+echo "\n"
+echo "Environment variables set successfully"
