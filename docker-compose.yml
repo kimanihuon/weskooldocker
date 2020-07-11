@@ -89,6 +89,10 @@ services:
       - JWT
       - CERTKEY
       - CERTCHAIN
+      - USER_NAME
+      - PASSWORD
+      - USER_EMAIL
+      - PROJECT_NAME
     network_mode: "host"
     command: ["node", "index.js"]
     volumes:
