@@ -12,7 +12,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD
     volumes:
-      - ~/projs/weskool/db/nodes/rdb1:/data/db
+      - ~/projs/weskool/db/nodes/db:/data/db
   
   weskool:
     restart: unless-stopped
