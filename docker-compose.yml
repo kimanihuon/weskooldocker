@@ -4,7 +4,7 @@ services:
 
   # Mongo DB server
   mongodb:
-    container_name: mongo-dm
+    container_name: mongo-weskool
     restart: unless-stopped
     image: mongo
     network_mode: "host"
