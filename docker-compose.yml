@@ -15,7 +15,7 @@ services:
     # ports:
     #   - 27017:27017
     volumes:
-      - ~/projs/DockerWeskool/db/nodes/rdb1:/data/db
+      - ~/projs/weskool/db/nodes/rdb1:/data/db
 
   db1:
     restart: unless-stopped
@@ -27,7 +27,7 @@ services:
     # ports:
     #   - 27018:27017
     volumes:
-      - ~/projs/DockerWeskool/db/nodes/rdb2:/data/db
+      - ~/projs/weskool/db/nodes/rdb2:/data/db
     depends_on:
       - db
 
@@ -41,7 +41,7 @@ services:
     # ports:
     #   - 27019:27017
     volumes:
-      - ~/projs/DockerWeskool/db/nodes/rdb3:/data/db
+      - ~/projs/weskool/db/nodes/rdb3:/data/db
     depends_on:
       - db1
 
