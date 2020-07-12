@@ -32,11 +32,8 @@ services:
     # links:
     #   - db
     depends_on:
-      - db
-      - db1
-      - db2
+      - mongodb
       - api
-      - mongo-replicator
 
   api:
     restart: unless-stopped
@@ -80,14 +77,10 @@ services:
     volumes:
       - /etc/letsencrypt/live/weskool.team:/etc/letsencrypt/live/weskool.team/
       - /etc/letsencrypt/archive/weskool.team:/etc/letsencrypt/archive/weskool.team/
-      - ~/projs/DockerWeskool/db/uploads:/db/uploads/
+      - ~/projs/weskool/db/uploads:/db/uploads/
     command: ["node", "uploads.js"]
     depends_on:
-      - db
-      - db1
-      - db2
-      - mongo-replicator
-      - weskool
+      - mongodb
 
   downloads:
     restart: unless-stopped
@@ -103,15 +96,10 @@ services:
     volumes:
       - /etc/letsencrypt/live/weskool.team:/etc/letsencrypt/live/weskool.team/
       - /etc/letsencrypt/archive/weskool.team:/etc/letsencrypt/archive/weskool.team/
-      - ~/projs/DockerWeskool/db:/db
-      - ~/projs/DockerWeskool/Api/modules:/modules
+      - ~/projs/weskool/db:/db
+      - ~/projs/weskool/api/modules:/modules
     command: ["node", "downloads.js"]
     depends_on:
-      - db
-      - db1
-      - db2
-      - mongo-replicator
-      - weskool
-      - uploads
+      - mongodb
 
   
