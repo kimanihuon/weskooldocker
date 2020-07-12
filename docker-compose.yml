@@ -2,59 +2,18 @@ version: "3"
 
 services:
 
-  db:
+  # Mongo DB server
+  mongodb:
+    container_name: mongo-dm
     restart: unless-stopped
     image: mongo
-    # environment:
-    #   MONGO_INITDB_ROOT_USERNAME: root
-    #   MONGO_INITDB_ROOT_PASSWORD: password
-    command: --replSet rs0 --port 27017 --bind_ip localhost --dbpath /data/db
     network_mode: "host"
-    # networks:
-    #   - mongo-cluster
-    # ports:
-    #   - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
     volumes:
       - ~/projs/weskool/db/nodes/rdb1:/data/db
-
-  db1:
-    restart: unless-stopped
-    image: mongo
-    command: --replSet rs0 --port 27018 --bind_ip localhost --dbpath /data/db
-    network_mode: "host"
-    # networks:
-    #   - mongo-cluster
-    # ports:
-    #   - 27018:27017
-    volumes:
-      - ~/projs/weskool/db/nodes/rdb2:/data/db
-    depends_on:
-      - db
-
-  db2:
-    restart: unless-stopped
-    image: mongo
-    command: --replSet rs0 --port 27019 --bind_ip localhost --dbpath /data/db
-    network_mode: "host"
-    # networks:
-    #   - mongo-cluster
-    # ports:
-    #   - 27019:27017
-    volumes:
-      - ~/projs/weskool/db/nodes/rdb3:/data/db
-    depends_on:
-      - db1
-
-  mongo-replicator:
-    build: ./db/replicator
-    network_mode: "host"
-    # networks:
-    #   - mongo-cluster
-    depends_on:
-      - db
-      - db1
-      - db2
-
+  
   weskool:
     restart: unless-stopped
     build:
@@ -93,6 +52,8 @@ services:
       - PASSWORD
       - USER_EMAIL
       - PROJECT_NAME
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
     network_mode: "host"
     command: ["node", "index.js"]
     volumes:
@@ -103,10 +64,7 @@ services:
     # links:
     #   - db
     depends_on:
-      - db
-      - db1
-      - db2
-      - mongo-replicator
+      - mongodb
 
   uploads:
     restart: unless-stopped
