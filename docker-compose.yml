@@ -58,7 +58,7 @@ services:
   weskool:
     restart: unless-stopped
     build:
-      context: ./weskoolmm #Must be directory with Dockerfile
+      context: ./frontend #Must be directory with Dockerfile
       dockerfile: Dockerfile
     environment:
       - ENV
@@ -82,7 +82,7 @@ services:
   api:
     restart: unless-stopped
     build:
-      context: ./Api
+      context: ./api
       dockerfile: Dockerfile
     environment:
       - ENV
@@ -111,7 +111,7 @@ services:
   uploads:
     restart: unless-stopped
     build:
-      context: ./Api
+      context: ./api
       dockerfile: Dockerfile
     environment:
       - ENV
@@ -134,7 +134,7 @@ services:
   downloads:
     restart: unless-stopped
     build:
-      context: ./Api
+      context: ./api
       dockerfile: Dockerfile
     environment:
       - ENV
