@@ -1,1 +1,14 @@
-docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer/data:/data -v /etc/letsencrypt/live/<redacted>:/certs/live/<redacted>:ro -v /etc/letsencrypt/archive/<redacted>:/certs/archive/<redacted>:ro --name portainer portainer/portainer --ssl --sslcert /certs/live/<redacted>/cert.pem --sslkey /certs/live/<redacted>/privkey.pem
+docker run -d -p 9000:9000 -v 
+/var/run/docker.sock:/var/run/docker.sock -v 
+/root/portainer/data:/data -v 
+/etc/letsencrypt/live/<redacted>:/certs/live/<redacted>:ro -v 
+/etc/letsencrypt/archive/<redacted>:/certs/archive/<redacted>:ro --name 
+portainer portainer/portainer --ssl --sslcert 
+/certs/live/<redacted>/cert.pem --sslkey 
+/certs/live/<redacted>/privkey.pem
+
+docker run --net=host --name mongo-weskool -it -d -v \
+~/projs/weskool/DockerWeskool/db/nodes/db:/data/db \
+-e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
+-e MONGO_INITDB_ROOT_PASSWORD=secret \
+mongo
